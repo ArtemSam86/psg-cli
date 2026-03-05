@@ -1,0 +1,14 @@
+"README.md" = '''
+# Generic Project
+
+Created with gen-cli.
+'''
+
+".gitignore" = '''
+# Игнорируемые файлы
+.DS_Store
+*.log
+'''
+
+"src/" = {}   # пустая папка
+"docs/" = {}  # пустая папка

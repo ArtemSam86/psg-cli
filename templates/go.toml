@@ -1,0 +1,26 @@
+"go.mod" = '''
+module myapp
+
+go 1.21
+'''
+
+"main.go" = '''
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, Go!")
+}
+'''
+
+"README.md" = '''
+# My Go App
+
+Run with: `go run main.go`
+'''
+
+".gitignore" = '''
+myapp
+*.exe
+'''

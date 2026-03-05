@@ -1,0 +1,40 @@
+"setup.py" = '''
+from setuptools import setup, find_packages
+
+setup(
+    name="myapp",
+    version="0.1",
+    packages=find_packages(),
+    install_requires=[],
+    entry_points={
+        "console_scripts": [
+            "myapp=myapp.main:main",
+        ],
+    },
+)
+'''
+
+"myapp/__init__.py" = '''"""My app package."""'''
+
+"myapp/main.py" = '''
+def main():
+    print("Hello, Python!")
+
+if __name__ == "__main__":
+    main()
+'''
+
+"README.md" = '''
+# My Python App
+
+Install with: `pip install -e .`
+'''
+
+".gitignore" = '''
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+'''

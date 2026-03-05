@@ -1,0 +1,34 @@
+"Cargo.toml" = '''
+[package]
+name = "myapp"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+'''
+
+"src/main.rs" = '''
+fn main() {
+    println!("Hello, world!");
+}
+'''
+
+"src/lib.rs" = '''
+//! My Rust library
+
+pub fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+'''
+
+"README.md" = '''
+# My Rust Application
+
+Generated with `gen-cli`.
+'''
+
+".gitignore" = '''
+/target
+Cargo.lock
+*.rs.bk
+'''
