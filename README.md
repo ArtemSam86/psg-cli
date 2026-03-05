@@ -365,4 +365,4 @@ gen-cli list-templates
 ## Лицензия
 ```text
 MIT
-```# psg-cli
+```
