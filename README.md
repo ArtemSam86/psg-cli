@@ -1,3 +1,4 @@
+```markdown
 # psg-cli
 
 `psg-cli` — это CLI-инструмент на Rust для генерации файлов и папок из описания структуры. Он поддерживает несколько форматов входных файлов (JSON, TOML, YAML, текстовое дерево) и встроенные шаблоны для быстрого создания проектов на популярных языках.
@@ -10,33 +11,6 @@
 - Принудительная перезапись (`--force`).
 - Кроссплатформенность.
 
-## Содержание
-
-- [Установка](#установка)
-- [Команды и опции](#команды-и-опции)
-    - [`generate`](#generate)
-    - [`init`](#init)
-    - [`list-templates`](#list-templates)
-- [Форматы описания структуры](#форматы-описания-структуры)
-    - [JSON](#json)
-    - [TOML](#toml)
-    - [YAML](#yaml)
-    - [TXT (дерево)](#txt-дерево)
-- [Встроенные шаблоны](#встроенные-шаблоны)
-    - [Rust](#rust)
-    - [Node.js](#nodejs)
-    - [Python](#python)
-    - [Go](#go)
-    - [Generic](#generic)
-- [Примеры использования](#примеры-использования)
-    - [Генерация из JSON](#генерация-из-json)
-    - [Генерация из TOML](#генерация-из-toml)
-    - [Генерация из YAML](#генерация-из-yaml)
-    - [Генерация из текстового дерева](#генерация-из-текстового-дерева)
-    - [Инициализация проекта](#инициализация-проекта)
-- [Примечания](#примечания)
-- [Лицензия](#лицензия)
-
 ## Установка
 
 ### Из исходного кода
@@ -46,61 +20,71 @@ git clone https://github.com/yourname/psg-cli.git
 cd psg-cli
 cargo build --release
 sudo cp target/release/psg-cli /usr/local/bin/
-cargo install psg-cli
 ```
 
-### Альтернативный способ – использовать `cargo install --path .` прямо из папки проекта:
+### Через Cargo (локально)
+
 ```bash
 cargo install --path .
 ```
-Эта команда соберёт проект и поместит бинарник в ~/.cargo/bin/ (обычно этот каталог уже добавлен в PATH после установки Rust).
-
-После этого вы сможете вызывать программу:
-```bash
-psg-cli --help
-```
 
 ## Команды и опции
-### `generate`
-Создаёт файловую структуру на основе файла описания.
-```bash
-gen-cli generate <ФАЙЛ> [опции]
-```
-#### Аргументы:
-- `<ФАЙЛ>` — путь к файлу с описанием (поддерживаются расширения
-- `.json`, `.toml`, `.yaml`, `.yml`, `.txt`).
-#### Опции:
 
-| Короткая      | Длинная          | Описание
-|---------------|------------------|---------
-| `-o` <DIR>    | `--output` <DIR> | Целевая директория (по умолчанию текущая).
-| `-f`          | `--force`        | Принудительно перезаписывать все существующие файлы.
-| `-i`          | `--interactive`  | Спрашивать подтверждение перед перезаписью каждого файла.
+### `generate`
+
+Создаёт файловую структуру на основе файла описания.
+
+```bash
+psg-cli generate <ФАЙЛ> [опции]
+```
+
+**Аргументы:**
+
+- `<ФАЙЛ>` — путь к файлу с описанием (поддерживаются расширения `.json`, `.toml`, `.yaml`, `.yml`, `.txt`).
+
+**Опции:**
+
+| Короткая | Длинная        | Описание                                                  |
+|----------|----------------|-----------------------------------------------------------|
+| `-o DIR` | `--output DIR` | Целевая директория (по умолчанию текущая).                |
+| `-f`     | `--force`      | Принудительно перезаписывать все существующие файлы.      |
+| `-i`     | `--interactive`| Спрашивать подтверждение перед перезаписью каждого файла. |
 
 ### `init`
+
 Создаёт проект по одному из встроенных шаблонов.
+
 ```bash
-gen-cli init <ШАБЛОН> [опции]
+psg-cli init <ШАБЛОН> [опции]
 ```
-#### Аргументы:
-- <ШАБЛОН> — имя шаблона: `rust`, `node`, `python`, `go`, `generic`.
-#### Опции:
-| Короткая   | Длинная          | Описание |
-|------------|------------------|----------|
-| `-o` <DIR> | `--output` <DIR> | Целевая директория (по умолчанию текущая).
+
+**Аргументы:**
+
+- `<ШАБЛОН>` — имя шаблона: `rust`, `node`, `python`, `go`, `generic`.
+
+**Опции:**
+
+| Короткая | Длинная        | Описание                                                  |
+|----------|----------------|-----------------------------------------------------------|
+| `-o DIR` | `--output DIR` | Целевая директория (по умолчанию текущая).                |
 
 ### `list-templates`
+
 Выводит список доступных шаблонов.
+
 ```bash
-gen-cli list-templates
+psg-cli list-templates
 ```
 
 ## Форматы описания структуры
+
 ### JSON
+
 Корневой элемент — объект. Ключи — имена файлов или папок. Значения могут быть:
 - строкой (содержимое файла);
-- null (пустой файл);
+- `null` (пустой файл);
 - объектом (подпапка).
+
 ```json
 {
   "README.md": "# My Project",
@@ -113,7 +97,9 @@ gen-cli list-templates
 ```
 
 ### TOML
+
 Аналогично JSON. Многострочное содержимое задаётся в тройных кавычках.
+
 ```toml
 "README.md" = "# My Project"
 
@@ -133,6 +119,7 @@ version = "0.1.0"
 ```
 
 ### YAML
+
 ```yaml
 README.md: "# My Project"
 src:
@@ -148,8 +135,10 @@ Cargo.toml: |
 ```
 
 ### TXT (дерево)
+
 Отступы 4 пробела. Символы псевдографики игнорируются. Если имя заканчивается на `/` — это папка.
-```text
+
+```
 src/
     main.rs
     lib.rs
@@ -159,7 +148,9 @@ empty_dir/
 ```
 
 ## Встроенные шаблоны
+
 ### Rust
+
 ```toml
 "Cargo.toml" = '''
 [package]
@@ -187,7 +178,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 "README.md" = '''
 # My Rust Application
 
-Generated with `gen-cli`.
+Generated with `psg-cli`.
 '''
 
 ".gitignore" = '''
@@ -198,12 +189,13 @@ Cargo.lock
 ```
 
 ### Node.js
+
 ```toml
 "package.json" = '''
 {
   "name": "myapp",
   "version": "1.0.0",
-  "description": "A Node.js project generated with gen-cli",
+  "description": "A Node.js project generated with psg-cli",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -233,6 +225,7 @@ node_modules/
 ```
 
 ### Python
+
 ```toml
 "setup.py" = '''
 from setuptools import setup, find_packages
@@ -277,6 +270,7 @@ build/
 ```
 
 ### Go
+
 ```toml
 "go.mod" = '''
 module myapp
@@ -307,11 +301,12 @@ myapp
 ```
 
 ### Generic
+
 ```toml
 "README.md" = '''
 # Generic Project
 
-Created with gen-cli.
+Created with psg-cli.
 '''
 
 ".gitignore" = '''
@@ -325,44 +320,49 @@ Created with gen-cli.
 ```
 
 ## Примеры использования
+
 ### Генерация из JSON
+
 ```bash
-gen-cli generate structure.json -o ./c_project
+psg-cli generate structure.json -o ./c_project
 ```
 
 ### Генерация из TOML (интерактивно)
+
 ```bash
-gen-cli generate project.toml --interactive
+psg-cli generate project.toml --interactive
 ```
 
 ### Генерация из YAML
+
 ```bash
-gen-cli generate structure.yaml
+psg-cli generate structure.yaml
 ```
 
 ### Генерация из текстового дерева
+
 ```bash
-gen-cli generate tree.txt -o ./my_project
+psg-cli generate tree.txt -o ./my_project
 ```
 
 ### Инициализация проекта
+
 ```bash
-gen-cli init rust -o ./hello
-gen-cli init node
-gen-cli init python -o ./my_python_app
-gen-cli init go
-gen-cli init generic
-gen-cli list-templates
+psg-cli init rust -o ./hello
+psg-cli init node
+psg-cli init python -o ./my_python_app
+psg-cli init go
+psg-cli init generic
+psg-cli list-templates
 ```
 
 ## Примечания
-- При генерации, если файл уже существует, поведение определяется
-опциями --force или --interactive. Иначе существующие файлы пропускаются.
+
+- При генерации, если файл уже существует, поведение определяется опциями `--force` или `--interactive`. Иначе существующие файлы пропускаются.
 - Имена файлов и папок могут содержать любые символы, кроме запрещённых ОС.
 - В текстовом дереве отступ должен быть строго 4 пробела.
 - Шаблоны встроены в исполняемый файл.
 
 ## Лицензия
-```text
 MIT
 ```
